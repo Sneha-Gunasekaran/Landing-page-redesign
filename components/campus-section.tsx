@@ -43,8 +43,25 @@ export function CampusSection() {
   return (
     <section id="campus" className="py-16 md:py-32 relative overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-primary" />
-      <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-primary/80" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-secondary/80" />
+      
+      {/* Animated Glow Orbs */}
+      <motion.div 
+        animate={{ 
+          scale: [1, 1.3, 1],
+          opacity: [0.2, 0.4, 0.2]
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-0 right-0 w-96 h-96 bg-secondary/30 rounded-full blur-[100px]" 
+      />
+      <motion.div 
+        animate={{ 
+          scale: [1.3, 1, 1.3],
+          opacity: [0.3, 0.5, 0.3]
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-0 left-0 w-96 h-96 bg-accent/20 rounded-full blur-[100px]" 
+      />
       
       {/* Animated Pattern Overlay */}
       <motion.div 

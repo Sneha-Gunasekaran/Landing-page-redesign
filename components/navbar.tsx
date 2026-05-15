@@ -41,7 +41,7 @@ export function Navbar() {
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? "bg-card/95 backdrop-blur-md shadow-lg border-b border-border" 
+          ? "bg-card/80 backdrop-blur-xl shadow-lg shadow-primary/5 border-b border-border/50" 
           : "bg-transparent"
       }`}
     >
@@ -53,7 +53,7 @@ export function Navbar() {
               whileHover={{ scale: 1.1, rotate: 5 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center"
+              className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center shadow-lg shadow-primary/30"
             >
               <GraduationCap className="w-7 h-7 text-primary-foreground" />
             </motion.div>
@@ -110,7 +110,7 @@ export function Navbar() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.95 }}
                       transition={{ duration: 0.2, ease: "easeOut" }}
-                      className="absolute top-full left-0 mt-2 w-48 bg-card rounded-xl shadow-xl border border-border overflow-hidden"
+                      className="absolute top-full left-0 mt-2 w-48 bg-card/90 backdrop-blur-xl rounded-xl shadow-xl shadow-primary/10 border border-border/50 overflow-hidden"
                     >
                       {link.dropdown.map((item, index) => (
                         <motion.div
@@ -142,11 +142,11 @@ export function Navbar() {
               </Button>
             </motion.div>
             <motion.div 
-              whileHover={{ scale: 1.05, boxShadow: "0 10px 40px -10px hsl(var(--primary) / 0.5)" }} 
+              whileHover={{ scale: 1.05, boxShadow: "0 10px 40px -10px hsl(var(--primary) / 0.6)" }} 
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <Button size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/25">
+              <Button size="sm" className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-primary-foreground shadow-lg shadow-primary/30 border border-primary/20">
                 Apply Now
               </Button>
             </motion.div>

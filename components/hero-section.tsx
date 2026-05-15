@@ -13,31 +13,42 @@ const stats = [
 export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/10" />
+      {/* Animated Gradient Orbs */}
       <motion.div 
         animate={{ 
-          scale: [1, 1.2, 1],
-          opacity: [0.1, 0.15, 0.1]
+          scale: [1, 1.3, 1],
+          opacity: [0.4, 0.6, 0.4],
+          x: [0, 50, 0],
+          y: [0, -30, 0]
         }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl" 
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-gradient-to-r from-primary/40 to-secondary/30 rounded-full blur-[100px]" 
       />
       <motion.div 
         animate={{ 
           scale: [1.2, 1, 1.2],
-          opacity: [0.15, 0.2, 0.15]
+          opacity: [0.3, 0.5, 0.3],
+          x: [0, -40, 0],
+          y: [0, 40, 0]
+        }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-secondary/40 to-accent/30 rounded-full blur-[120px]" 
+      />
+      <motion.div 
+        animate={{ 
+          scale: [1, 1.4, 1],
+          opacity: [0.2, 0.4, 0.2]
         }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 4 }}
-        className="absolute bottom-1/4 -right-32 w-96 h-96 bg-secondary/20 rounded-full blur-3xl" 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-gradient-to-tr from-accent/20 to-primary/20 rounded-full blur-[80px]" 
       />
       
       {/* Grid Pattern */}
       <div 
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.05]"
         style={{
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px),
-                            linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
           backgroundSize: '60px 60px'
         }}
       />
@@ -50,10 +61,10 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             whileHover={{ scale: 1.05, y: -2 }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-accent/10 border border-accent/20 rounded-full mb-4 md:mb-8 cursor-default"
+            className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-primary/20 backdrop-blur-sm border border-primary/30 rounded-full mb-4 md:mb-8 cursor-default shadow-lg shadow-primary/10"
           >
             <motion.span 
-              animate={{ scale: [1, 1.2, 1] }}
+              animate={{ scale: [1, 1.2, 1], boxShadow: ["0 0 0 0 rgba(var(--primary), 0.4)", "0 0 0 10px rgba(var(--primary), 0)", "0 0 0 0 rgba(var(--primary), 0)"] }}
               transition={{ duration: 2, repeat: Infinity }}
               className="w-1.5 h-1.5 md:w-2 md:h-2 bg-accent rounded-full" 
             />
@@ -69,7 +80,7 @@ export function HeroSection() {
           >
             <span className="block">Shape Your Future with</span>
             <motion.span 
-              className="block mt-1 md:mt-2 bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent"
+              className="block mt-1 md:mt-2 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent"
               animate={{ 
                 backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
               }}
@@ -106,7 +117,7 @@ export function HeroSection() {
             >
               <Button 
                 size="lg" 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-xl shadow-primary/25 px-6 py-5 md:px-8 md:py-6 text-sm md:text-lg group relative overflow-hidden"
+                className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-primary-foreground shadow-xl shadow-primary/30 px-6 py-5 md:px-8 md:py-6 text-sm md:text-lg group relative overflow-hidden border border-primary/20"
               >
                 <motion.span
                   className="absolute inset-0 bg-gradient-to-r from-primary via-white/20 to-primary"
@@ -128,7 +139,7 @@ export function HeroSection() {
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="px-6 py-5 md:px-8 md:py-6 text-sm md:text-lg border-2 group"
+                className="px-6 py-5 md:px-8 md:py-6 text-sm md:text-lg border-2 border-border/50 bg-card/30 backdrop-blur-sm group hover:border-primary/50 hover:bg-primary/10"
               >
                 <motion.span
                   whileHover={{ scale: 1.2, rotate: 15 }}
@@ -157,9 +168,9 @@ export function HeroSection() {
                 whileHover={{ 
                   scale: 1.08, 
                   y: -8,
-                  boxShadow: "0 20px 40px -15px hsl(var(--primary) / 0.2)"
+                  boxShadow: "0 20px 40px -15px hsl(var(--primary) / 0.4)"
                 }}
-                className="text-center p-3 md:p-6 bg-card/50 backdrop-blur-sm rounded-xl md:rounded-2xl border border-border/50 cursor-default transition-colors hover:border-primary/30 hover:bg-card/80"
+                className="text-center p-3 md:p-6 bg-card/40 backdrop-blur-md rounded-xl md:rounded-2xl border border-border/30 cursor-default transition-colors hover:border-primary/50 hover:bg-card/60 shadow-lg shadow-primary/5"
               >
                 <motion.div
                   whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
