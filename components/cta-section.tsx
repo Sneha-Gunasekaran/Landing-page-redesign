@@ -22,7 +22,12 @@ export function CTASection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-sm font-semibold text-accent uppercase tracking-wider">Start Your Journey</span>
+            <motion.span 
+              className="text-sm font-semibold text-accent uppercase tracking-wider inline-block"
+              whileHover={{ scale: 1.05, x: 5 }}
+            >
+              Start Your Journey
+            </motion.span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-6 leading-tight text-balance">
               Ready to Transform{" "}
               <span className="text-primary">Your Future?</span>
@@ -34,33 +39,32 @@ export function CTASection() {
 
             {/* Contact Info */}
             <div className="space-y-4 mb-8">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                  <Phone className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Call us</p>
-                  <p className="font-semibold text-foreground">+91 79 2630 1234</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                  <Mail className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Email us</p>
-                  <p className="font-semibold text-foreground">admissions@jguni.in</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                  <MapPin className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Visit us</p>
-                  <p className="font-semibold text-foreground">Ahmedabad, Gujarat, India</p>
-                </div>
-              </div>
+              {[
+                { icon: Phone, label: "Call us", value: "+91 79 2630 1234" },
+                { icon: Mail, label: "Email us", value: "admissions@jguni.in" },
+                { icon: MapPin, label: "Visit us", value: "Ahmedabad, Gujarat, India" }
+              ].map((item, index) => (
+                <motion.div 
+                  key={item.label}
+                  className="flex items-center gap-4 group cursor-default"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: 0.3 + index * 0.1 }}
+                  whileHover={{ x: 10 }}
+                >
+                  <motion.div 
+                    className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all duration-300"
+                    whileHover={{ rotate: [0, -10, 10, 0] }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <item.icon className="w-5 h-5 text-primary group-hover:text-primary-foreground transition-colors" />
+                  </motion.div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">{item.label}</p>
+                    <p className="font-semibold text-foreground group-hover:text-primary transition-colors">{item.value}</p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
 
@@ -69,6 +73,9 @@ export function CTASection() {
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
+            whileHover={{ 
+              boxShadow: "0 40px 80px -20px hsl(var(--primary) / 0.2)"
+            }}
             className="bg-card rounded-3xl border border-border shadow-2xl shadow-primary/5 p-8 md:p-10"
           >
             <h3 className="text-2xl font-bold text-foreground mb-2">Get in Touch</h3>
@@ -76,42 +83,65 @@ export function CTASection() {
 
             <form className="space-y-5">
               <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-medium text-foreground mb-2 block">First Name</label>
-                  <input
-                    type="text"
-                    placeholder="John"
-                    className="w-full px-4 py-3 rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground placeholder:text-muted-foreground"
-                  />
-                </div>
-                <div>
-                  <label className="text-sm font-medium text-foreground mb-2 block">Last Name</label>
-                  <input
-                    type="text"
-                    placeholder="Doe"
-                    className="w-full px-4 py-3 rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground placeholder:text-muted-foreground"
-                  />
-                </div>
+                {[
+                  { label: "First Name", placeholder: "John", type: "text" },
+                  { label: "Last Name", placeholder: "Doe", type: "text" }
+                ].map((field, index) => (
+                  <motion.div 
+                    key={field.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.4 + index * 0.05 }}
+                  >
+                    <label className="text-sm font-medium text-foreground mb-2 block">{field.label}</label>
+                    <motion.input
+                      type={field.type}
+                      placeholder={field.placeholder}
+                      whileFocus={{ scale: 1.02 }}
+                      className="w-full px-4 py-3 rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground placeholder:text-muted-foreground hover:border-primary/50"
+                    />
+                  </motion.div>
+                ))}
               </div>
-              <div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.5 }}
+              >
                 <label className="text-sm font-medium text-foreground mb-2 block">Email</label>
-                <input
+                <motion.input
                   type="email"
                   placeholder="john@example.com"
-                  className="w-full px-4 py-3 rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground placeholder:text-muted-foreground"
+                  whileFocus={{ scale: 1.02 }}
+                  className="w-full px-4 py-3 rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground placeholder:text-muted-foreground hover:border-primary/50"
                 />
-              </div>
-              <div>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.55 }}
+              >
                 <label className="text-sm font-medium text-foreground mb-2 block">Phone</label>
-                <input
+                <motion.input
                   type="tel"
                   placeholder="+91 98765 43210"
-                  className="w-full px-4 py-3 rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground placeholder:text-muted-foreground"
+                  whileFocus={{ scale: 1.02 }}
+                  className="w-full px-4 py-3 rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground placeholder:text-muted-foreground hover:border-primary/50"
                 />
-              </div>
-              <div>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.6 }}
+              >
                 <label className="text-sm font-medium text-foreground mb-2 block">Program of Interest</label>
-                <select className="w-full px-4 py-3 rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground">
+                <motion.select 
+                  whileFocus={{ scale: 1.02 }}
+                  className="w-full px-4 py-3 rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground hover:border-primary/50 cursor-pointer"
+                >
                   <option value="">Select a program</option>
                   <option value="bba">BBA / BBA (Hons)</option>
                   <option value="bcom">B.Com / B.Com (Hons)</option>
@@ -119,24 +149,47 @@ export function CTASection() {
                   <option value="btech">B.Tech (CSE/IT/AI)</option>
                   <option value="mba">MBA</option>
                   <option value="mca">MCA</option>
-                </select>
-              </div>
-              <div>
+                </motion.select>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.65 }}
+              >
                 <label className="text-sm font-medium text-foreground mb-2 block">Message (Optional)</label>
-                <textarea
+                <motion.textarea
                   placeholder="Tell us about your goals..."
                   rows={3}
-                  className="w-full px-4 py-3 rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground placeholder:text-muted-foreground resize-none"
+                  whileFocus={{ scale: 1.02 }}
+                  className="w-full px-4 py-3 rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground placeholder:text-muted-foreground resize-none hover:border-primary/50"
                 />
-              </div>
-              <Button 
-                type="submit" 
-                size="lg" 
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/25 py-6 text-lg group"
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.7 }}
+                whileHover={{ scale: 1.02, y: -3 }}
+                whileTap={{ scale: 0.98 }}
               >
-                Submit Enquiry
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
+                <Button 
+                  type="submit" 
+                  size="lg" 
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/25 py-6 text-lg group relative overflow-hidden"
+                >
+                  <motion.span
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: "100%" }}
+                    transition={{ duration: 0.6 }}
+                  />
+                  <span className="relative flex items-center justify-center">
+                    Submit Enquiry
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </Button>
+              </motion.div>
             </form>
           </motion.div>
         </div>

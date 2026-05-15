@@ -15,8 +15,22 @@ export function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/10" />
-      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-secondary/20 rounded-full blur-3xl" />
+      <motion.div 
+        animate={{ 
+          scale: [1, 1.2, 1],
+          opacity: [0.1, 0.15, 0.1]
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl" 
+      />
+      <motion.div 
+        animate={{ 
+          scale: [1.2, 1, 1.2],
+          opacity: [0.15, 0.2, 0.15]
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+        className="absolute bottom-1/4 -right-32 w-96 h-96 bg-secondary/20 rounded-full blur-3xl" 
+      />
       
       {/* Grid Pattern */}
       <div 
@@ -35,9 +49,14 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 border border-accent/20 rounded-full mb-8"
+            whileHover={{ scale: 1.05, y: -2 }}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 border border-accent/20 rounded-full mb-8 cursor-default"
           >
-            <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
+            <motion.span 
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="w-2 h-2 bg-accent rounded-full" 
+            />
             <span className="text-sm font-medium text-accent">UGC Approved University</span>
           </motion.div>
 
@@ -49,9 +68,16 @@ export function HeroSection() {
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight mb-6"
           >
             <span className="block">Shape Your Future with</span>
-            <span className="block mt-2 bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">
+            <motion.span 
+              className="block mt-2 bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent"
+              animate={{ 
+                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+              }}
+              transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+              style={{ backgroundSize: "200% 200%" }}
+            >
               Industry-Ready Education
-            </span>
+            </motion.span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -73,21 +99,46 @@ export function HeroSection() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
           >
-            <Button 
-              size="lg" 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-xl shadow-primary/25 px-8 py-6 text-lg group"
+            <motion.div
+              whileHover={{ scale: 1.05, y: -3 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              Explore Programs
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="px-8 py-6 text-lg border-2 group"
+              <Button 
+                size="lg" 
+                className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-xl shadow-primary/25 px-8 py-6 text-lg group relative overflow-hidden"
+              >
+                <motion.span
+                  className="absolute inset-0 bg-gradient-to-r from-primary via-white/20 to-primary"
+                  initial={{ x: "-100%" }}
+                  whileHover={{ x: "100%" }}
+                  transition={{ duration: 0.6 }}
+                />
+                <span className="relative flex items-center">
+                  Explore Programs
+                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </Button>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.05, y: -3 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <Play className="mr-2 w-5 h-5 group-hover:scale-110 transition-transform" />
-              Watch Campus Tour
-            </Button>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="px-8 py-6 text-lg border-2 group"
+              >
+                <motion.span
+                  whileHover={{ scale: 1.2, rotate: 15 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
+                  <Play className="mr-2 w-5 h-5" />
+                </motion.span>
+                Watch Campus Tour
+              </Button>
+            </motion.div>
           </motion.div>
 
           {/* Stats */}
@@ -103,10 +154,25 @@ export function HeroSection() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                className="text-center p-4 md:p-6 bg-card/50 backdrop-blur-sm rounded-2xl border border-border/50"
+                whileHover={{ 
+                  scale: 1.08, 
+                  y: -8,
+                  boxShadow: "0 20px 40px -15px hsl(var(--primary) / 0.2)"
+                }}
+                className="text-center p-4 md:p-6 bg-card/50 backdrop-blur-sm rounded-2xl border border-border/50 cursor-default transition-colors hover:border-primary/30 hover:bg-card/80"
               >
-                <stat.icon className="w-6 h-6 md:w-8 md:h-8 text-primary mx-auto mb-2" />
-                <div className="text-2xl md:text-3xl font-bold text-foreground">{stat.value}</div>
+                <motion.div
+                  whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <stat.icon className="w-6 h-6 md:w-8 md:h-8 text-primary mx-auto mb-2" />
+                </motion.div>
+                <motion.div 
+                  className="text-2xl md:text-3xl font-bold text-foreground"
+                  whileHover={{ scale: 1.1 }}
+                >
+                  {stat.value}
+                </motion.div>
                 <div className="text-xs md:text-sm text-muted-foreground">{stat.label}</div>
               </motion.div>
             ))}
@@ -120,11 +186,12 @@ export function HeroSection() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        whileHover={{ scale: 1.2 }}
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex justify-center"
+          className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex justify-center cursor-pointer hover:border-primary/50 transition-colors"
         >
           <motion.div
             animate={{ y: [0, 12, 0] }}

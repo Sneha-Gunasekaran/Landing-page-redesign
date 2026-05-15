@@ -27,9 +27,13 @@ export function PartnersSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+          <motion.p 
+            className="text-sm font-medium text-muted-foreground uppercase tracking-wider"
+            whileHover={{ letterSpacing: "0.2em" }}
+            transition={{ duration: 0.3 }}
+          >
             Trusted by Industry Leaders
-          </p>
+          </motion.p>
         </motion.div>
 
         <motion.div
@@ -44,13 +48,25 @@ export function PartnersSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.1 * index }}
+              whileHover={{ 
+                y: -8,
+                scale: 1.1,
+              }}
               className="group"
             >
-              <div className="h-12 px-6 flex items-center justify-center bg-card rounded-xl border border-border group-hover:border-primary/30 group-hover:shadow-lg transition-all duration-300">
-                <span className="text-xl font-bold text-muted-foreground group-hover:text-primary transition-colors">
+              <motion.div 
+                className="h-12 px-6 flex items-center justify-center bg-card rounded-xl border border-border group-hover:border-primary/50 group-hover:shadow-lg group-hover:shadow-primary/10 transition-all duration-300 cursor-default"
+                whileHover={{
+                  boxShadow: "0 20px 40px -15px hsl(var(--primary) / 0.2)"
+                }}
+              >
+                <motion.span 
+                  className="text-xl font-bold text-muted-foreground group-hover:text-primary transition-colors"
+                  whileHover={{ scale: 1.1 }}
+                >
                   {partner.logo}
-                </span>
-              </div>
+                </motion.span>
+              </motion.div>
             </motion.div>
           ))}
         </motion.div>

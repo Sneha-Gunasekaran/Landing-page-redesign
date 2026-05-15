@@ -56,7 +56,13 @@ export function ProgramsSection() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="text-sm font-semibold text-accent uppercase tracking-wider">Our Programs</span>
+          <motion.span 
+            className="text-sm font-semibold text-accent uppercase tracking-wider inline-block"
+            whileHover={{ scale: 1.05, letterSpacing: "0.2em" }}
+            transition={{ duration: 0.2 }}
+          >
+            Our Programs
+          </motion.span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-6 text-balance">
             Choose Your Path to{" "}
             <span className="text-primary">Success</span>
@@ -75,9 +81,11 @@ export function ProgramsSection() {
           className="flex flex-wrap justify-center gap-2 mb-12"
         >
           {categories.map((category) => (
-            <button
+            <motion.button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.98 }}
               className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeCategory === category.id
                   ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
@@ -85,7 +93,7 @@ export function ProgramsSection() {
               }`}
             >
               {category.name}
-            </button>
+            </motion.button>
           ))}
         </motion.div>
 
@@ -103,23 +111,57 @@ export function ProgramsSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="group p-6 bg-card rounded-2xl border border-border hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300 cursor-pointer"
+              whileHover={{ 
+                y: -12,
+                scale: 1.02,
+                boxShadow: "0 30px 60px -15px hsl(var(--primary) / 0.2)"
+              }}
+              className="group p-6 bg-card rounded-2xl border border-border hover:border-primary/30 transition-all duration-300 cursor-pointer relative overflow-hidden"
             >
-              <div className="flex items-start justify-between mb-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
-                  <program.icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors" />
+              {/* Animated background gradient on hover */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              />
+              
+              <div className="relative z-10">
+                <div className="flex items-start justify-between mb-4">
+                  <motion.div 
+                    className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary transition-colors duration-300"
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <program.icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors" />
+                  </motion.div>
+                  <motion.span 
+                    className="flex items-center gap-1 text-sm text-muted-foreground bg-muted px-3 py-1 rounded-full"
+                    whileHover={{ scale: 1.05, backgroundColor: "hsl(var(--primary) / 0.1)" }}
+                  >
+                    <Clock className="w-3.5 h-3.5" />
+                    {program.duration}
+                  </motion.span>
                 </div>
-                <span className="flex items-center gap-1 text-sm text-muted-foreground bg-muted px-3 py-1 rounded-full">
-                  <Clock className="w-3.5 h-3.5" />
-                  {program.duration}
-                </span>
-              </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                {program.name}
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4">{program.description}</p>
-              <div className="flex items-center text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                Learn More <ArrowRight className="w-4 h-4 ml-1" />
+                <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                  {program.name}
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4">{program.description}</p>
+                
+                <motion.div 
+                  className="flex items-center text-sm font-medium text-primary"
+                  initial={{ opacity: 0, x: -10 }}
+                  whileHover={{ x: 5 }}
+                  animate={{ opacity: 1, x: 0 }}
+                >
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    Learn More
+                  </span>
+                  <motion.span
+                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1, repeat: Infinity, repeatDelay: 0.5 }}
+                  >
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </motion.span>
+                </motion.div>
               </div>
             </motion.div>
           ))}
@@ -132,10 +174,21 @@ export function ProgramsSection() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="text-center mt-12"
         >
-          <Button variant="outline" size="lg" className="group">
-            View All Programs
-            <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Button>
+          <motion.div
+            whileHover={{ scale: 1.05, y: -3 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <Button variant="outline" size="lg" className="group border-2">
+              View All Programs
+              <motion.span
+                className="ml-2"
+                animate={{ x: [0, 3, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                <ArrowRight className="w-4 h-4" />
+              </motion.span>
+            </Button>
+          </motion.div>
         </motion.div>
       </div>
     </section>

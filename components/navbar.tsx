@@ -49,9 +49,14 @@ export function Navbar() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform">
+            <motion.div 
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center"
+            >
               <GraduationCap className="w-7 h-7 text-primary-foreground" />
-            </div>
+            </motion.div>
             <div className="flex flex-col">
               <span className="text-xl font-bold text-foreground tracking-tight">JG University</span>
               <span className="text-xs text-muted-foreground">Since 1965</span>
@@ -67,35 +72,60 @@ export function Navbar() {
                 onMouseEnter={() => link.dropdown && setActiveDropdown(link.name)}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <Link
-                  href={link.href}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1 ${
-                    isScrolled 
-                      ? "text-foreground hover:bg-muted" 
-                      : "text-foreground/90 hover:text-foreground hover:bg-foreground/5"
-                  }`}
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  {link.name}
-                  {link.dropdown && <ChevronDown className="w-4 h-4" />}
-                </Link>
+                  <Link
+                    href={link.href}
+                    className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1 ${
+                      isScrolled 
+                        ? "text-foreground hover:text-primary" 
+                        : "text-foreground/90 hover:text-primary"
+                    }`}
+                  >
+                    {link.name}
+                    {link.dropdown && (
+                      <motion.span
+                        animate={{ rotate: activeDropdown === link.name ? 180 : 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <ChevronDown className="w-4 h-4" />
+                      </motion.span>
+                    )}
+                    <motion.span
+                      className="absolute inset-0 bg-primary/10 rounded-lg -z-10"
+                      initial={{ scale: 0, opacity: 0 }}
+                      whileHover={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.2 }}
+                    />
+                  </Link>
+                </motion.div>
                 
                 {/* Dropdown */}
                 <AnimatePresence>
                   {link.dropdown && activeDropdown === link.name && (
                     <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      transition={{ duration: 0.2, ease: "easeOut" }}
                       className="absolute top-full left-0 mt-2 w-48 bg-card rounded-xl shadow-xl border border-border overflow-hidden"
                     >
-                      {link.dropdown.map((item) => (
-                        <Link
+                      {link.dropdown.map((item, index) => (
+                        <motion.div
                           key={item.name}
-                          href={item.href}
-                          className="block px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors"
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.05 }}
                         >
-                          {item.name}
-                        </Link>
+                          <Link
+                            href={item.href}
+                            className="block px-4 py-3 text-sm text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-200 hover:pl-6"
+                          >
+                            {item.name}
+                          </Link>
+                        </motion.div>
                       ))}
                     </motion.div>
                   )}
@@ -106,25 +136,53 @@ export function Navbar() {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-3">
-            <Button variant="ghost" size="sm" className="text-foreground">
-              Login
-            </Button>
-            <Button size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/25">
-              Apply Now
-            </Button>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button variant="ghost" size="sm" className="text-foreground hover:text-primary">
+                Login
+              </Button>
+            </motion.div>
+            <motion.div 
+              whileHover={{ scale: 1.05, boxShadow: "0 10px 40px -10px hsl(var(--primary) / 0.5)" }} 
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
+              <Button size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/25">
+                Apply Now
+              </Button>
+            </motion.div>
           </div>
 
           {/* Mobile Menu Button */}
-          <button
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors"
           >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6 text-foreground" />
-            ) : (
-              <Menu className="w-6 h-6 text-foreground" />
-            )}
-          </button>
+            <AnimatePresence mode="wait">
+              {isMobileMenuOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <X className="w-6 h-6 text-foreground" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Menu className="w-6 h-6 text-foreground" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.button>
         </div>
 
         {/* Mobile Menu */}
@@ -134,18 +192,25 @@ export function Navbar() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden bg-card border-t border-border"
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="lg:hidden bg-card border-t border-border overflow-hidden"
             >
               <div className="py-4 space-y-1">
-                {navLinks.map((link) => (
-                  <Link
+                {navLinks.map((link, index) => (
+                  <motion.div
                     key={link.name}
-                    href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="block px-4 py-3 text-foreground hover:bg-muted rounded-lg transition-colors"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05 }}
                   >
-                    {link.name}
-                  </Link>
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block px-4 py-3 text-foreground hover:bg-primary/10 hover:text-primary rounded-lg transition-all duration-200 hover:pl-6"
+                    >
+                      {link.name}
+                    </Link>
+                  </motion.div>
                 ))}
                 <div className="px-4 pt-4 space-y-2">
                   <Button variant="outline" className="w-full">Login</Button>

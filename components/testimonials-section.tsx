@@ -18,7 +18,7 @@ const testimonials = [
     name: "Yatendra Sinh Joddha",
     role: "Technical Lead, TCS",
     program: "BCA Graduate",
-    quote: "The BCA program provided me with a strong foundation in IT. The faculty&apos;s focus on giving the best training gave me the opportunity to apply my knowledge in real-world scenarios. Today, I draw upon the skills and knowledge that I gained at JG on a daily basis.",
+    quote: "The BCA program provided me with a strong foundation in IT. The faculty's focus on giving the best training gave me the opportunity to apply my knowledge in real-world scenarios. Today, I draw upon the skills and knowledge that I gained at JG on a daily basis.",
     rating: 5,
   },
   {
@@ -64,7 +64,14 @@ export function TestimonialsSection() {
     <section id="testimonials" className="py-24 md:py-32 relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-background to-muted/30" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" />
+      <motion.div 
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl"
+        animate={{ 
+          scale: [1, 1.1, 1],
+          opacity: [0.05, 0.1, 0.05]
+        }}
+        transition={{ duration: 8, repeat: Infinity }}
+      />
       
       <div className="container mx-auto px-4 lg:px-8 relative" ref={ref}>
         {/* Header */}
@@ -74,7 +81,12 @@ export function TestimonialsSection() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="text-sm font-semibold text-accent uppercase tracking-wider">Success Stories</span>
+          <motion.span 
+            className="text-sm font-semibold text-accent uppercase tracking-wider inline-block"
+            whileHover={{ scale: 1.05, letterSpacing: "0.2em" }}
+          >
+            Success Stories
+          </motion.span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-6 text-balance">
             Hear From Our{" "}
             <span className="text-primary">Alumni</span>
@@ -91,25 +103,46 @@ export function TestimonialsSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="max-w-4xl mx-auto"
         >
-          <div className="relative bg-card rounded-3xl border border-border shadow-2xl shadow-primary/5 p-8 md:p-12">
+          <motion.div 
+            className="relative bg-card rounded-3xl border border-border shadow-2xl shadow-primary/5 p-8 md:p-12"
+            whileHover={{ 
+              boxShadow: "0 30px 60px -15px hsl(var(--primary) / 0.15)"
+            }}
+            transition={{ duration: 0.3 }}
+          >
             {/* Quote Icon */}
-            <div className="absolute -top-6 left-8 md:left-12 w-12 h-12 bg-primary rounded-2xl flex items-center justify-center shadow-lg shadow-primary/25">
+            <motion.div 
+              className="absolute -top-6 left-8 md:left-12 w-12 h-12 bg-primary rounded-2xl flex items-center justify-center shadow-lg shadow-primary/25"
+              whileHover={{ scale: 1.15, rotate: 10 }}
+              animate={{ 
+                y: [0, -5, 0]
+              }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
               <Quote className="w-6 h-6 text-primary-foreground" />
-            </div>
+            </motion.div>
 
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.3 }}
+                initial={{ opacity: 0, x: 50, scale: 0.95 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: -50, scale: 0.95 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
                 className="pt-4"
               >
                 {/* Rating */}
                 <div className="flex gap-1 mb-6">
                   {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-secondary text-secondary" />
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: i * 0.1 }}
+                      whileHover={{ scale: 1.3, rotate: 15 }}
+                    >
+                      <Star className="w-5 h-5 fill-secondary text-secondary" />
+                    </motion.div>
                   ))}
                 </div>
 
@@ -120,11 +153,14 @@ export function TestimonialsSection() {
 
                 {/* Author */}
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center">
+                  <motion.div 
+                    className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                  >
                     <span className="text-xl font-bold text-primary">
                       {testimonials[currentIndex].name.charAt(0)}
                     </span>
-                  </div>
+                  </motion.div>
                   <div>
                     <h4 className="font-semibold text-foreground">{testimonials[currentIndex].name}</h4>
                     <p className="text-sm text-muted-foreground">{testimonials[currentIndex].role}</p>
@@ -138,33 +174,39 @@ export function TestimonialsSection() {
             <div className="flex items-center justify-between mt-8 pt-8 border-t border-border">
               <div className="flex gap-2">
                 {testimonials.map((_, index) => (
-                  <button
+                  <motion.button
                     key={index}
                     onClick={() => setCurrentIndex(index)}
-                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                    whileHover={{ scale: 1.3 }}
+                    whileTap={{ scale: 0.9 }}
+                    className={`h-2.5 rounded-full transition-all duration-300 ${
                       index === currentIndex 
                         ? "bg-primary w-8" 
-                        : "bg-muted hover:bg-muted-foreground/30"
+                        : "bg-muted hover:bg-muted-foreground/30 w-2.5"
                     }`}
                   />
                 ))}
               </div>
               <div className="flex gap-2">
-                <button
+                <motion.button
                   onClick={prevTestimonial}
-                  className="p-2 rounded-full bg-muted hover:bg-muted/80 transition-colors"
+                  whileHover={{ scale: 1.15, x: -3 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="p-2 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-colors"
                 >
-                  <ChevronLeft className="w-5 h-5 text-foreground" />
-                </button>
-                <button
+                  <ChevronLeft className="w-5 h-5" />
+                </motion.button>
+                <motion.button
                   onClick={nextTestimonial}
-                  className="p-2 rounded-full bg-muted hover:bg-muted/80 transition-colors"
+                  whileHover={{ scale: 1.15, x: 3 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="p-2 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-colors"
                 >
-                  <ChevronRight className="w-5 h-5 text-foreground" />
-                </button>
+                  <ChevronRight className="w-5 h-5" />
+                </motion.button>
               </div>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

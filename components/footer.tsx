@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { motion } from "framer-motion"
 import { GraduationCap, Facebook, Twitter, Instagram, Linkedin, Youtube, ArrowUpRight } from "lucide-react"
 
 const footerLinks = {
@@ -52,10 +53,14 @@ export function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-background rounded-xl flex items-center justify-center">
+            <Link href="/" className="flex items-center gap-3 mb-6 group">
+              <motion.div 
+                className="w-12 h-12 bg-background rounded-xl flex items-center justify-center"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
                 <GraduationCap className="w-7 h-7 text-foreground" />
-              </div>
+              </motion.div>
               <div className="flex flex-col">
                 <span className="text-xl font-bold text-background tracking-tight">JG University</span>
                 <span className="text-xs text-background/60">Since 1965</span>
@@ -67,14 +72,19 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-3">
               {socialLinks.map((social) => (
-                <Link
+                <motion.div
                   key={social.label}
-                  href={social.href}
-                  className="w-10 h-10 bg-background/10 rounded-xl flex items-center justify-center hover:bg-background/20 transition-colors"
-                  aria-label={social.label}
+                  whileHover={{ scale: 1.2, y: -5 }}
+                  whileTap={{ scale: 0.9 }}
                 >
-                  <social.icon className="w-5 h-5 text-background" />
-                </Link>
+                  <Link
+                    href={social.href}
+                    className="w-10 h-10 bg-background/10 rounded-xl flex items-center justify-center hover:bg-background hover:text-foreground transition-all duration-300"
+                    aria-label={social.label}
+                  >
+                    <social.icon className="w-5 h-5" />
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -85,9 +95,11 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.programs.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-background/70 hover:text-background transition-colors text-sm">
-                    {link.name}
-                  </Link>
+                  <motion.div whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                    <Link href={link.href} className="text-background/70 hover:text-background transition-colors text-sm inline-block">
+                      {link.name}
+                    </Link>
+                  </motion.div>
                 </li>
               ))}
             </ul>
@@ -99,9 +111,11 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.resources.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-background/70 hover:text-background transition-colors text-sm">
-                    {link.name}
-                  </Link>
+                  <motion.div whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                    <Link href={link.href} className="text-background/70 hover:text-background transition-colors text-sm inline-block">
+                      {link.name}
+                    </Link>
+                  </motion.div>
                 </li>
               ))}
             </ul>
@@ -113,9 +127,11 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.about.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-background/70 hover:text-background transition-colors text-sm">
-                    {link.name}
-                  </Link>
+                  <motion.div whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                    <Link href={link.href} className="text-background/70 hover:text-background transition-colors text-sm inline-block">
+                      {link.name}
+                    </Link>
+                  </motion.div>
                 </li>
               ))}
             </ul>
@@ -126,18 +142,26 @@ export function Footer() {
             <h4 className="text-sm font-semibold text-background uppercase tracking-wider mb-6">Stay Updated</h4>
             <p className="text-background/70 text-sm mb-4">Subscribe to our newsletter for updates.</p>
             <form className="space-y-3">
-              <input
+              <motion.input
                 type="email"
                 placeholder="Your email"
-                className="w-full px-4 py-3 rounded-xl bg-background/10 border border-background/20 focus:border-background/40 outline-none transition-all text-background placeholder:text-background/50 text-sm"
+                whileFocus={{ scale: 1.02 }}
+                className="w-full px-4 py-3 rounded-xl bg-background/10 border border-background/20 focus:border-background/40 outline-none transition-all text-background placeholder:text-background/50 text-sm hover:border-background/30"
               />
-              <button
+              <motion.button
                 type="submit"
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.98 }}
                 className="w-full px-4 py-3 bg-background text-foreground rounded-xl font-medium text-sm hover:bg-background/90 transition-colors flex items-center justify-center gap-2 group"
               >
                 Subscribe
-                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </button>
+                <motion.span
+                  animate={{ x: [0, 3, 0], y: [0, -3, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <ArrowUpRight className="w-4 h-4" />
+                </motion.span>
+              </motion.button>
             </form>
           </div>
         </div>
@@ -152,13 +176,17 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-6">
               {footerLinks.legal.map((link) => (
-                <Link
+                <motion.div
                   key={link.name}
-                  href={link.href}
-                  className="text-background/60 hover:text-background text-sm transition-colors"
+                  whileHover={{ y: -2 }}
                 >
-                  {link.name}
-                </Link>
+                  <Link
+                    href={link.href}
+                    className="text-background/60 hover:text-background text-sm transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </div>

@@ -45,7 +45,12 @@ export function AboutSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-sm font-semibold text-accent uppercase tracking-wider">About Us</span>
+            <motion.span 
+              className="text-sm font-semibold text-accent uppercase tracking-wider inline-block"
+              whileHover={{ scale: 1.05, x: 5 }}
+            >
+              About Us
+            </motion.span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-6 leading-tight text-balance">
               Preparing Students for the{" "}
               <span className="text-primary">Future of Work</span>
@@ -62,13 +67,22 @@ export function AboutSection() {
             
             {/* Highlights */}
             <div className="flex flex-wrap gap-4">
-              {["NEP 2020 Compliant", "Global Collaborations", "Industry Partnerships"].map((tag) => (
-                <span 
+              {["NEP 2020 Compliant", "Global Collaborations", "Industry Partnerships"].map((tag, index) => (
+                <motion.span 
                   key={tag}
-                  className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.3 + index * 0.1 }}
+                  whileHover={{ 
+                    scale: 1.1, 
+                    y: -3,
+                    boxShadow: "0 10px 30px -10px hsl(var(--primary) / 0.3)"
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium cursor-default border border-transparent hover:border-primary/30 transition-colors"
                 >
                   {tag}
-                </span>
+                </motion.span>
               ))}
             </div>
           </motion.div>
@@ -81,13 +95,34 @@ export function AboutSection() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group p-6 bg-card rounded-2xl border border-border hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300"
+                whileHover={{ 
+                  y: -10,
+                  scale: 1.02,
+                  boxShadow: "0 25px 50px -12px hsl(var(--primary) / 0.15)"
+                }}
+                className="group p-6 bg-card rounded-2xl border border-border hover:border-primary/30 transition-all duration-300 cursor-default"
               >
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                <motion.div 
+                  className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary transition-all duration-300"
+                  whileHover={{ rotate: [0, -10, 10, 0], scale: 1.15 }}
+                  transition={{ duration: 0.4 }}
+                >
                   <feature.icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">{feature.title}</h3>
+                </motion.div>
+                <motion.h3 
+                  className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors"
+                >
+                  {feature.title}
+                </motion.h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
+                
+                {/* Hover line effect */}
+                <motion.div 
+                  className="h-0.5 bg-primary mt-4 origin-left"
+                  initial={{ scaleX: 0 }}
+                  whileHover={{ scaleX: 1 }}
+                  transition={{ duration: 0.3 }}
+                />
               </motion.div>
             ))}
           </div>
