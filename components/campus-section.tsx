@@ -41,7 +41,7 @@ export function CampusSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="campus" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="campus" className="py-16 md:py-32 relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-primary" />
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-primary/80" />
@@ -65,19 +65,19 @@ export function CampusSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-10 md:mb-16"
         >
           <motion.span 
-            className="text-sm font-semibold text-primary-foreground/70 uppercase tracking-wider inline-block"
+            className="text-xs md:text-sm font-semibold text-primary-foreground/70 uppercase tracking-wider inline-block"
             whileHover={{ scale: 1.05, letterSpacing: "0.2em" }}
           >
             Campus Life
           </motion.span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mt-4 mb-6 text-balance">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mt-3 md:mt-4 mb-4 md:mb-6 text-balance">
             World-Class Facilities for{" "}
             <span className="text-secondary">Tomorrow&apos;s Leaders</span>
           </h2>
-          <p className="text-lg text-primary-foreground/80">
+          <p className="text-sm md:text-lg text-primary-foreground/80">
             Our campus is designed to foster innovation, collaboration, and holistic development.
           </p>
         </motion.div>
@@ -87,7 +87,7 @@ export function CampusSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 mb-10 md:mb-16"
         >
           {facilities.map((facility, index) => (
             <motion.div
@@ -100,17 +100,17 @@ export function CampusSection() {
                 scale: 1.03,
                 boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.4)"
               }}
-              className="p-6 bg-primary-foreground/10 backdrop-blur-sm rounded-2xl border border-primary-foreground/20 hover:bg-primary-foreground/20 transition-all duration-300 group cursor-default"
+              className="p-4 md:p-6 bg-primary-foreground/10 backdrop-blur-sm rounded-xl md:rounded-2xl border border-primary-foreground/20 hover:bg-primary-foreground/20 transition-all duration-300 group cursor-default"
             >
               <motion.div 
-                className="w-14 h-14 bg-primary-foreground/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-secondary transition-colors duration-300"
+                className="w-10 h-10 md:w-14 md:h-14 bg-primary-foreground/20 rounded-lg md:rounded-xl flex items-center justify-center mb-3 md:mb-4 group-hover:bg-secondary transition-colors duration-300"
                 whileHover={{ rotate: [0, -15, 15, 0], scale: 1.1 }}
                 transition={{ duration: 0.4 }}
               >
-                <facility.icon className="w-7 h-7 text-primary-foreground group-hover:text-primary transition-colors" />
+                <facility.icon className="w-5 h-5 md:w-7 md:h-7 text-primary-foreground group-hover:text-primary transition-colors" />
               </motion.div>
-              <h3 className="text-lg font-semibold text-primary-foreground mb-2 group-hover:text-secondary transition-colors">{facility.title}</h3>
-              <p className="text-sm text-primary-foreground/70 leading-relaxed">{facility.description}</p>
+              <h3 className="text-sm md:text-lg font-semibold text-primary-foreground mb-1 md:mb-2 group-hover:text-secondary transition-colors">{facility.title}</h3>
+              <p className="text-xs md:text-sm text-primary-foreground/70 leading-relaxed line-clamp-2 md:line-clamp-none">{facility.description}</p>
               
               {/* Animated underline */}
               <motion.div
@@ -129,12 +129,12 @@ export function CampusSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
           whileHover={{ scale: 1.01 }}
-          className="bg-primary-foreground/10 backdrop-blur-sm rounded-3xl border border-primary-foreground/20 p-8 md:p-12"
+          className="bg-primary-foreground/10 backdrop-blur-sm rounded-2xl md:rounded-3xl border border-primary-foreground/20 p-5 md:p-12"
         >
-          <h3 className="text-xl md:text-2xl font-bold text-primary-foreground mb-8 text-center">
+          <h3 className="text-lg md:text-2xl font-bold text-primary-foreground mb-5 md:mb-8 text-center">
             Why Choose JG University?
           </h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4">
             {highlights.map((highlight, index) => (
               <motion.div
                 key={highlight}
@@ -146,10 +146,10 @@ export function CampusSection() {
                   scale: 1.02,
                   backgroundColor: "rgba(255, 255, 255, 0.1)"
                 }}
-                className="flex items-center gap-3 p-4 bg-primary-foreground/5 rounded-xl cursor-default transition-all duration-300"
+                className="flex items-center gap-2 md:gap-3 p-2.5 md:p-4 bg-primary-foreground/5 rounded-lg md:rounded-xl cursor-default transition-all duration-300"
               >
                 <motion.div 
-                  className="w-2 h-2 bg-secondary rounded-full flex-shrink-0"
+                  className="w-1.5 h-1.5 md:w-2 md:h-2 bg-secondary rounded-full flex-shrink-0"
                   whileHover={{ scale: 1.5 }}
                   animate={{ 
                     scale: [1, 1.2, 1],
@@ -157,7 +157,7 @@ export function CampusSection() {
                   }}
                   transition={{ duration: 2, repeat: Infinity, delay: index * 0.2 }}
                 />
-                <span className="text-sm md:text-base text-primary-foreground font-medium">{highlight}</span>
+                <span className="text-xs md:text-base text-primary-foreground font-medium">{highlight}</span>
               </motion.div>
             ))}
           </div>

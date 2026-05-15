@@ -50,14 +50,14 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             whileHover={{ scale: 1.05, y: -2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 border border-accent/20 rounded-full mb-8 cursor-default"
+            className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-accent/10 border border-accent/20 rounded-full mb-4 md:mb-8 cursor-default"
           >
             <motion.span 
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="w-2 h-2 bg-accent rounded-full" 
+              className="w-1.5 h-1.5 md:w-2 md:h-2 bg-accent rounded-full" 
             />
-            <span className="text-sm font-medium text-accent">UGC Approved University</span>
+            <span className="text-xs md:text-sm font-medium text-accent">UGC Approved University</span>
           </motion.div>
 
           {/* Main Heading */}
@@ -65,11 +65,11 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight mb-6"
+            className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-4 md:mb-6"
           >
             <span className="block">Shape Your Future with</span>
             <motion.span 
-              className="block mt-2 bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent"
+              className="block mt-1 md:mt-2 bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent"
               animate={{ 
                 backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
               }}
@@ -85,7 +85,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed text-balance"
+            className="text-sm md:text-lg text-muted-foreground max-w-3xl mx-auto mb-6 md:mb-10 leading-relaxed text-balance px-2"
           >
             JG University is a New Age Tech-Driven University offering programmes that evolve 
             as per future industry demand, enabling students to get into employment or 
@@ -97,7 +97,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 mb-10 md:mb-16"
           >
             <motion.div
               whileHover={{ scale: 1.05, y: -3 }}
@@ -106,7 +106,7 @@ export function HeroSection() {
             >
               <Button 
                 size="lg" 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-xl shadow-primary/25 px-8 py-6 text-lg group relative overflow-hidden"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-xl shadow-primary/25 px-6 py-5 md:px-8 md:py-6 text-sm md:text-lg group relative overflow-hidden"
               >
                 <motion.span
                   className="absolute inset-0 bg-gradient-to-r from-primary via-white/20 to-primary"
@@ -128,7 +128,7 @@ export function HeroSection() {
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="px-8 py-6 text-lg border-2 group"
+                className="px-6 py-5 md:px-8 md:py-6 text-sm md:text-lg border-2 group"
               >
                 <motion.span
                   whileHover={{ scale: 1.2, rotate: 15 }}
@@ -146,7 +146,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto"
+            className="grid grid-cols-3 gap-2 md:gap-8 max-w-2xl mx-auto"
           >
             {stats.map((stat, index) => (
               <motion.div
@@ -159,21 +159,21 @@ export function HeroSection() {
                   y: -8,
                   boxShadow: "0 20px 40px -15px hsl(var(--primary) / 0.2)"
                 }}
-                className="text-center p-4 md:p-6 bg-card/50 backdrop-blur-sm rounded-2xl border border-border/50 cursor-default transition-colors hover:border-primary/30 hover:bg-card/80"
+                className="text-center p-3 md:p-6 bg-card/50 backdrop-blur-sm rounded-xl md:rounded-2xl border border-border/50 cursor-default transition-colors hover:border-primary/30 hover:bg-card/80"
               >
                 <motion.div
                   whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
                   transition={{ duration: 0.4 }}
                 >
-                  <stat.icon className="w-6 h-6 md:w-8 md:h-8 text-primary mx-auto mb-2" />
+                  <stat.icon className="w-5 h-5 md:w-8 md:h-8 text-primary mx-auto mb-1 md:mb-2" />
                 </motion.div>
                 <motion.div 
-                  className="text-2xl md:text-3xl font-bold text-foreground"
+                  className="text-lg md:text-3xl font-bold text-foreground"
                   whileHover={{ scale: 1.1 }}
                 >
                   {stat.value}
                 </motion.div>
-                <div className="text-xs md:text-sm text-muted-foreground">{stat.label}</div>
+                <div className="text-[10px] md:text-sm text-muted-foreground">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>

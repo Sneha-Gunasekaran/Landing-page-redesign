@@ -33,7 +33,7 @@ export function AboutSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="about" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="about" className="py-16 md:py-32 relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/50 to-transparent" />
       
@@ -46,27 +46,27 @@ export function AboutSection() {
             transition={{ duration: 0.6 }}
           >
             <motion.span 
-              className="text-sm font-semibold text-accent uppercase tracking-wider inline-block"
+              className="text-xs md:text-sm font-semibold text-accent uppercase tracking-wider inline-block"
               whileHover={{ scale: 1.05, x: 5 }}
             >
               About Us
             </motion.span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-6 leading-tight text-balance">
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground mt-3 md:mt-4 mb-4 md:mb-6 leading-tight text-balance">
               Preparing Students for the{" "}
               <span className="text-primary">Future of Work</span>
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+            <p className="text-sm md:text-lg text-muted-foreground leading-relaxed mb-4 md:mb-8">
               JG University is a UGC approved University sponsored by the ASIA Charitable Trust, 
               which has been in the field of education since 1965. We successfully manage 17 colleges 
               and 3 schools, creating a legacy of academic excellence.
             </p>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+            <p className="text-sm md:text-lg text-muted-foreground leading-relaxed mb-4 md:mb-8">
               Our programmes are NEP 2020 compliant, featuring collaboration with foreign universities 
               for curriculum delivery and student exchange, ensuring a truly global educational experience.
             </p>
             
             {/* Highlights */}
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-2 md:gap-4">
               {["NEP 2020 Compliant", "Global Collaborations", "Industry Partnerships"].map((tag, index) => (
                 <motion.span 
                   key={tag}
@@ -79,7 +79,7 @@ export function AboutSection() {
                     boxShadow: "0 10px 30px -10px hsl(var(--primary) / 0.3)"
                   }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium cursor-default border border-transparent hover:border-primary/30 transition-colors"
+                  className="px-3 py-1.5 md:px-4 md:py-2 bg-primary/10 text-primary rounded-full text-xs md:text-sm font-medium cursor-default border border-transparent hover:border-primary/30 transition-colors"
                 >
                   {tag}
                 </motion.span>
@@ -88,7 +88,7 @@ export function AboutSection() {
           </motion.div>
 
           {/* Right Content - Feature Cards */}
-          <div className="grid sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 gap-3 md:gap-6">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -100,21 +100,21 @@ export function AboutSection() {
                   scale: 1.02,
                   boxShadow: "0 25px 50px -12px hsl(var(--primary) / 0.15)"
                 }}
-                className="group p-6 bg-card rounded-2xl border border-border hover:border-primary/30 transition-all duration-300 cursor-default"
+                className="group p-4 md:p-6 bg-card rounded-xl md:rounded-2xl border border-border hover:border-primary/30 transition-all duration-300 cursor-default"
               >
                 <motion.div 
-                  className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary transition-all duration-300"
+                  className="w-10 h-10 md:w-12 md:h-12 bg-primary/10 rounded-lg md:rounded-xl flex items-center justify-center mb-3 md:mb-4 group-hover:bg-primary transition-all duration-300"
                   whileHover={{ rotate: [0, -10, 10, 0], scale: 1.15 }}
                   transition={{ duration: 0.4 }}
                 >
-                  <feature.icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors" />
+                  <feature.icon className="w-5 h-5 md:w-6 md:h-6 text-primary group-hover:text-primary-foreground transition-colors" />
                 </motion.div>
                 <motion.h3 
-                  className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors"
+                  className="text-sm md:text-lg font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors"
                 >
                   {feature.title}
                 </motion.h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
+                <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
                 
                 {/* Hover line effect */}
                 <motion.div 

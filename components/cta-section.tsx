@@ -10,7 +10,7 @@ export function CTASection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="contact" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="contact" className="py-16 md:py-32 relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 via-background to-primary/5" />
       
@@ -23,22 +23,22 @@ export function CTASection() {
             transition={{ duration: 0.6 }}
           >
             <motion.span 
-              className="text-sm font-semibold text-accent uppercase tracking-wider inline-block"
+              className="text-xs md:text-sm font-semibold text-accent uppercase tracking-wider inline-block"
               whileHover={{ scale: 1.05, x: 5 }}
             >
               Start Your Journey
             </motion.span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-6 leading-tight text-balance">
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground mt-3 md:mt-4 mb-4 md:mb-6 leading-tight text-balance">
               Ready to Transform{" "}
               <span className="text-primary">Your Future?</span>
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+            <p className="text-sm md:text-lg text-muted-foreground leading-relaxed mb-6 md:mb-8">
               Take the first step towards a successful career. Our admissions team is ready 
               to guide you through the process and help you find the perfect program.
             </p>
 
             {/* Contact Info */}
-            <div className="space-y-4 mb-8">
+            <div className="space-y-3 md:space-y-4 mb-6 md:mb-8">
               {[
                 { icon: Phone, label: "Call us", value: "+91 79 2630 1234" },
                 { icon: Mail, label: "Email us", value: "admissions@jguni.in" },
@@ -46,22 +46,22 @@ export function CTASection() {
               ].map((item, index) => (
                 <motion.div 
                   key={item.label}
-                  className="flex items-center gap-4 group cursor-default"
+                  className="flex items-center gap-3 md:gap-4 group cursor-default"
                   initial={{ opacity: 0, x: -20 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: 0.3 + index * 0.1 }}
                   whileHover={{ x: 10 }}
                 >
                   <motion.div 
-                    className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all duration-300"
+                    className="w-10 h-10 md:w-12 md:h-12 bg-primary/10 rounded-lg md:rounded-xl flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all duration-300"
                     whileHover={{ rotate: [0, -10, 10, 0] }}
                     transition={{ duration: 0.4 }}
                   >
-                    <item.icon className="w-5 h-5 text-primary group-hover:text-primary-foreground transition-colors" />
+                    <item.icon className="w-4 h-4 md:w-5 md:h-5 text-primary group-hover:text-primary-foreground transition-colors" />
                   </motion.div>
                   <div>
-                    <p className="text-sm text-muted-foreground">{item.label}</p>
-                    <p className="font-semibold text-foreground group-hover:text-primary transition-colors">{item.value}</p>
+                    <p className="text-xs md:text-sm text-muted-foreground">{item.label}</p>
+                    <p className="text-sm md:text-base font-semibold text-foreground group-hover:text-primary transition-colors">{item.value}</p>
                   </div>
                 </motion.div>
               ))}
@@ -76,13 +76,13 @@ export function CTASection() {
             whileHover={{ 
               boxShadow: "0 40px 80px -20px hsl(var(--primary) / 0.2)"
             }}
-            className="bg-card rounded-3xl border border-border shadow-2xl shadow-primary/5 p-8 md:p-10"
+            className="bg-card rounded-2xl md:rounded-3xl border border-border shadow-2xl shadow-primary/5 p-5 md:p-10"
           >
-            <h3 className="text-2xl font-bold text-foreground mb-2">Get in Touch</h3>
-            <p className="text-muted-foreground mb-8">Fill the form below and we&apos;ll get back to you.</p>
+            <h3 className="text-xl md:text-2xl font-bold text-foreground mb-1 md:mb-2">Get in Touch</h3>
+            <p className="text-sm md:text-base text-muted-foreground mb-5 md:mb-8">Fill the form below and we&apos;ll get back to you.</p>
 
-            <form className="space-y-5">
-              <div className="grid sm:grid-cols-2 gap-4">
+            <form className="space-y-4 md:space-y-5">
+              <div className="grid grid-cols-2 gap-3 md:gap-4">
                 {[
                   { label: "First Name", placeholder: "John", type: "text" },
                   { label: "Last Name", placeholder: "Doe", type: "text" }
@@ -93,12 +93,12 @@ export function CTASection() {
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.4 + index * 0.05 }}
                   >
-                    <label className="text-sm font-medium text-foreground mb-2 block">{field.label}</label>
+                    <label className="text-xs md:text-sm font-medium text-foreground mb-1.5 md:mb-2 block">{field.label}</label>
                     <motion.input
                       type={field.type}
                       placeholder={field.placeholder}
                       whileFocus={{ scale: 1.02 }}
-                      className="w-full px-4 py-3 rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground placeholder:text-muted-foreground hover:border-primary/50"
+                      className="w-full px-3 py-2.5 md:px-4 md:py-3 rounded-lg md:rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm md:text-base text-foreground placeholder:text-muted-foreground hover:border-primary/50"
                     />
                   </motion.div>
                 ))}
@@ -109,12 +109,12 @@ export function CTASection() {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.5 }}
               >
-                <label className="text-sm font-medium text-foreground mb-2 block">Email</label>
+                <label className="text-xs md:text-sm font-medium text-foreground mb-1.5 md:mb-2 block">Email</label>
                 <motion.input
                   type="email"
                   placeholder="john@example.com"
                   whileFocus={{ scale: 1.02 }}
-                  className="w-full px-4 py-3 rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground placeholder:text-muted-foreground hover:border-primary/50"
+                  className="w-full px-3 py-2.5 md:px-4 md:py-3 rounded-lg md:rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm md:text-base text-foreground placeholder:text-muted-foreground hover:border-primary/50"
                 />
               </motion.div>
               
@@ -123,12 +123,12 @@ export function CTASection() {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.55 }}
               >
-                <label className="text-sm font-medium text-foreground mb-2 block">Phone</label>
+                <label className="text-xs md:text-sm font-medium text-foreground mb-1.5 md:mb-2 block">Phone</label>
                 <motion.input
                   type="tel"
                   placeholder="+91 98765 43210"
                   whileFocus={{ scale: 1.02 }}
-                  className="w-full px-4 py-3 rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground placeholder:text-muted-foreground hover:border-primary/50"
+                  className="w-full px-3 py-2.5 md:px-4 md:py-3 rounded-lg md:rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm md:text-base text-foreground placeholder:text-muted-foreground hover:border-primary/50"
                 />
               </motion.div>
               
@@ -137,10 +137,10 @@ export function CTASection() {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.6 }}
               >
-                <label className="text-sm font-medium text-foreground mb-2 block">Program of Interest</label>
+                <label className="text-xs md:text-sm font-medium text-foreground mb-1.5 md:mb-2 block">Program of Interest</label>
                 <motion.select 
                   whileFocus={{ scale: 1.02 }}
-                  className="w-full px-4 py-3 rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground hover:border-primary/50 cursor-pointer"
+                  className="w-full px-3 py-2.5 md:px-4 md:py-3 rounded-lg md:rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm md:text-base text-foreground hover:border-primary/50 cursor-pointer"
                 >
                   <option value="">Select a program</option>
                   <option value="bba">BBA / BBA (Hons)</option>
@@ -157,12 +157,12 @@ export function CTASection() {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.65 }}
               >
-                <label className="text-sm font-medium text-foreground mb-2 block">Message (Optional)</label>
+                <label className="text-xs md:text-sm font-medium text-foreground mb-1.5 md:mb-2 block">Message (Optional)</label>
                 <motion.textarea
                   placeholder="Tell us about your goals..."
                   rows={3}
                   whileFocus={{ scale: 1.02 }}
-                  className="w-full px-4 py-3 rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground placeholder:text-muted-foreground resize-none hover:border-primary/50"
+                  className="w-full px-3 py-2.5 md:px-4 md:py-3 rounded-lg md:rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm md:text-base text-foreground placeholder:text-muted-foreground resize-none hover:border-primary/50"
                 />
               </motion.div>
               
@@ -176,7 +176,7 @@ export function CTASection() {
                 <Button 
                   type="submit" 
                   size="lg" 
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/25 py-6 text-lg group relative overflow-hidden"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/25 py-5 md:py-6 text-sm md:text-lg group relative overflow-hidden"
                 >
                   <motion.span
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"

@@ -61,7 +61,7 @@ export function TestimonialsSection() {
   }
 
   return (
-    <section id="testimonials" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="testimonials" className="py-16 md:py-32 relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-background to-muted/30" />
       <motion.div 
@@ -79,19 +79,19 @@ export function TestimonialsSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-10 md:mb-16"
         >
           <motion.span 
-            className="text-sm font-semibold text-accent uppercase tracking-wider inline-block"
+            className="text-xs md:text-sm font-semibold text-accent uppercase tracking-wider inline-block"
             whileHover={{ scale: 1.05, letterSpacing: "0.2em" }}
           >
             Success Stories
           </motion.span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-6 text-balance">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground mt-3 md:mt-4 mb-4 md:mb-6 text-balance">
             Hear From Our{" "}
             <span className="text-primary">Alumni</span>
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-sm md:text-lg text-muted-foreground">
             Our graduates are making their mark across industries worldwide.
           </p>
         </motion.div>
@@ -104,7 +104,7 @@ export function TestimonialsSection() {
           className="max-w-4xl mx-auto"
         >
           <motion.div 
-            className="relative bg-card rounded-3xl border border-border shadow-2xl shadow-primary/5 p-8 md:p-12"
+            className="relative bg-card rounded-2xl md:rounded-3xl border border-border shadow-2xl shadow-primary/5 p-5 md:p-12"
             whileHover={{ 
               boxShadow: "0 30px 60px -15px hsl(var(--primary) / 0.15)"
             }}
@@ -112,14 +112,14 @@ export function TestimonialsSection() {
           >
             {/* Quote Icon */}
             <motion.div 
-              className="absolute -top-6 left-8 md:left-12 w-12 h-12 bg-primary rounded-2xl flex items-center justify-center shadow-lg shadow-primary/25"
+              className="absolute -top-4 md:-top-6 left-5 md:left-12 w-8 h-8 md:w-12 md:h-12 bg-primary rounded-xl md:rounded-2xl flex items-center justify-center shadow-lg shadow-primary/25"
               whileHover={{ scale: 1.15, rotate: 10 }}
               animate={{ 
                 y: [0, -5, 0]
               }}
               transition={{ duration: 3, repeat: Infinity }}
             >
-              <Quote className="w-6 h-6 text-primary-foreground" />
+              <Quote className="w-4 h-4 md:w-6 md:h-6 text-primary-foreground" />
             </motion.div>
 
             <AnimatePresence mode="wait">
@@ -132,7 +132,7 @@ export function TestimonialsSection() {
                 className="pt-4"
               >
                 {/* Rating */}
-                <div className="flex gap-1 mb-6">
+                <div className="flex gap-0.5 md:gap-1 mb-4 md:mb-6">
                   {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
                     <motion.div
                       key={i}
@@ -141,23 +141,23 @@ export function TestimonialsSection() {
                       transition={{ delay: i * 0.1 }}
                       whileHover={{ scale: 1.3, rotate: 15 }}
                     >
-                      <Star className="w-5 h-5 fill-secondary text-secondary" />
+                      <Star className="w-4 h-4 md:w-5 md:h-5 fill-secondary text-secondary" />
                     </motion.div>
                   ))}
                 </div>
 
                 {/* Quote */}
-                <p className="text-lg md:text-xl text-foreground leading-relaxed mb-8">
+                <p className="text-sm md:text-xl text-foreground leading-relaxed mb-5 md:mb-8">
                   &ldquo;{testimonials[currentIndex].quote}&rdquo;
                 </p>
 
                 {/* Author */}
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3 md:gap-4">
                   <motion.div 
-                    className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center"
+                    className="w-10 h-10 md:w-14 md:h-14 bg-primary/10 rounded-full flex items-center justify-center"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                   >
-                    <span className="text-xl font-bold text-primary">
+                    <span className="text-base md:text-xl font-bold text-primary">
                       {testimonials[currentIndex].name.charAt(0)}
                     </span>
                   </motion.div>

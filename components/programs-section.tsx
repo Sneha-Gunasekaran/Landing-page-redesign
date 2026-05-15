@@ -44,7 +44,7 @@ export function ProgramsSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="programs" className="py-24 md:py-32 relative">
+    <section id="programs" className="py-16 md:py-32 relative">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-background to-muted/30" />
       
@@ -54,20 +54,20 @@ export function ProgramsSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-8 md:mb-16"
         >
           <motion.span 
-            className="text-sm font-semibold text-accent uppercase tracking-wider inline-block"
+            className="text-xs md:text-sm font-semibold text-accent uppercase tracking-wider inline-block"
             whileHover={{ scale: 1.05, letterSpacing: "0.2em" }}
             transition={{ duration: 0.2 }}
           >
             Our Programs
           </motion.span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-6 text-balance">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground mt-3 md:mt-4 mb-4 md:mb-6 text-balance">
             Choose Your Path to{" "}
             <span className="text-primary">Success</span>
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-sm md:text-lg text-muted-foreground">
             Explore our diverse range of industry-aligned programs designed to prepare you 
             for the challenges of tomorrow.
           </p>
@@ -78,7 +78,7 @@ export function ProgramsSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-2 mb-12"
+          className="flex flex-wrap justify-center gap-2 mb-8 md:mb-12"
         >
           {categories.map((category) => (
             <motion.button
@@ -86,7 +86,7 @@ export function ProgramsSection() {
               onClick={() => setActiveCategory(category.id)}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
+              className={`px-4 py-2 md:px-6 md:py-3 rounded-full text-xs md:text-sm font-medium transition-all duration-300 ${
                 activeCategory === category.id
                   ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
                   : "bg-muted text-muted-foreground hover:bg-muted/80"
@@ -103,7 +103,7 @@ export function ProgramsSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6"
         >
           {programs[activeCategory as keyof typeof programs].map((program, index) => (
             <motion.div
@@ -116,7 +116,7 @@ export function ProgramsSection() {
                 scale: 1.02,
                 boxShadow: "0 30px 60px -15px hsl(var(--primary) / 0.2)"
               }}
-              className="group p-6 bg-card rounded-2xl border border-border hover:border-primary/30 transition-all duration-300 cursor-pointer relative overflow-hidden"
+              className="group p-4 md:p-6 bg-card rounded-xl md:rounded-2xl border border-border hover:border-primary/30 transition-all duration-300 cursor-pointer relative overflow-hidden"
             >
               {/* Animated background gradient on hover */}
               <motion.div
@@ -124,26 +124,26 @@ export function ProgramsSection() {
               />
               
               <div className="relative z-10">
-                <div className="flex items-start justify-between mb-4">
+                <div className="flex items-start justify-between mb-3 md:mb-4">
                   <motion.div 
-                    className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary transition-colors duration-300"
+                    className="w-10 h-10 md:w-12 md:h-12 bg-primary/10 rounded-lg md:rounded-xl flex items-center justify-center group-hover:bg-primary transition-colors duration-300"
                     whileHover={{ rotate: 360 }}
                     transition={{ duration: 0.5 }}
                   >
-                    <program.icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors" />
+                    <program.icon className="w-5 h-5 md:w-6 md:h-6 text-primary group-hover:text-primary-foreground transition-colors" />
                   </motion.div>
                   <motion.span 
-                    className="flex items-center gap-1 text-sm text-muted-foreground bg-muted px-3 py-1 rounded-full"
+                    className="hidden sm:flex items-center gap-1 text-xs text-muted-foreground bg-muted px-2 py-1 md:px-3 md:py-1 rounded-full"
                     whileHover={{ scale: 1.05, backgroundColor: "hsl(var(--primary) / 0.1)" }}
                   >
-                    <Clock className="w-3.5 h-3.5" />
+                    <Clock className="w-3 h-3" />
                     {program.duration}
                   </motion.span>
                 </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                <h3 className="text-sm md:text-lg font-semibold text-foreground mb-1 md:mb-2 group-hover:text-primary transition-colors">
                   {program.name}
                 </h3>
-                <p className="text-sm text-muted-foreground mb-4">{program.description}</p>
+                <p className="text-xs md:text-sm text-muted-foreground mb-2 md:mb-4 line-clamp-2">{program.description}</p>
                 
                 <motion.div 
                   className="flex items-center text-sm font-medium text-primary"
